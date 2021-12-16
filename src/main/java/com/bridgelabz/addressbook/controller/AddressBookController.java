@@ -27,7 +27,7 @@ public class AddressBookController {
         return addressBookService.getAllAddress();
     }
     @PostMapping(value = "/add")
-    public String addEmployee(@Valid @RequestBody AddressBookDto addressBookDto) {
+    public String addAddress(@Valid @RequestBody AddressBookDto addressBookDto) {
         return addressBookService.addAddressBook(addressBookDto);
     }
     @PutMapping(value = "/update/{id}")
