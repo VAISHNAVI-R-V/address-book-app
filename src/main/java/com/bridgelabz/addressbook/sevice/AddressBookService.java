@@ -32,7 +32,7 @@ public class AddressBookService {
     public String addAddressBook(AddressBookDto addressBookDto) {
         AddressBookEntity addressBookEntity = modelMapper.map(addressBookDto, AddressBookEntity.class);
         addressBookRepository.save(addressBookEntity);
-        return "Address Added Successfully!";
+        return "Address Added Successfully";
     }
 
     public AddressBookEntity getAddressBookById(int id) {
