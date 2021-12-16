@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook.integration;
 
 
 import com.bridgelabz.addressbook.controller.AddressBookController;
+import com.bridgelabz.addressbook.dto.AddressBookDto;
 import com.bridgelabz.addressbook.sevice.AddressBookService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -40,6 +41,24 @@ public class AddressBookITTest {
                         .post("/addressbook/add")
                         .content("{\"name\":\"Punam\",\"address\":\"Khb-colony\",\"city\":\"Bidar\"," +
                                 "\"state\":\"Karnataka\",\"phoneNumber\":\"9101122000\",\"zip\":\"585401\"}")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void updateAddressBookTest() throws Exception {
+        int id = 1;
+        AddressBookDto addressBookDto = new AddressBookDto();
+        addressBookDto.setName("Diksha");
+        addressBookDto.setAddress("KHB-Colony");
+        addressBookDto.setCity("Hubbali");
+        addressBookDto.setState("Karnataka");
+        addressBookDto.setPhoneNumber("9670000000");
+        addressBookDto.setZip("585691");
+        when(addressBookService.updateAddressBook(id,addressBookDto)).thenReturn("success");
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put("/addressbook/update/1")
+                        .content("{\"name\":\"Diksha\",\"address\":\"KHB-Colony\",\"city\":\"Bidar\"," +
+                                "\"state\":\"Karnataka\",\"phoneNumber\":\"9670000000\",\"zip\":\"585691\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
