@@ -58,7 +58,7 @@ public class AddressBookITTest {
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/addressbook/update/1")
                         .content("{\"name\":\"Diksha\",\"address\":\"KHB-Colony\",\"city\":\"Bidar\"," +
-                                "\"state\":\"Karnataka\",\"phoneNumber\":\"9670000000\",\"zip\":\"585691\"}")
+                                "\"state\":\"Karnataka\",\"phoneNumber\":\"9670000003\",\"zip\":\"585691\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
@@ -68,7 +68,7 @@ public class AddressBookITTest {
         mockMvc.perform(MockMvcRequestBuilders
                         .delete("/addressbook/delete/1")
                         .content("{\"name\":\"Diksha\",\"address\":\"KHB-Colony\",\"city\":\"Bidar\"," +
-                                "\"state\":\"Karnataka\",\"phoneNumber\":\"9670000000\",\"zip\":\"585691\"}")
+                                "\"state\":\"Karnataka\",\"phoneNumber\":\"9670000003\",\"zip\":\"585691\"}")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
