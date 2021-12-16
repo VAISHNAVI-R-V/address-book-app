@@ -8,12 +8,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,6 +31,16 @@ public class AddressBookITTest {
     void getAllAddressBookTest() throws Exception {
         when(addressBookService.getAllAddress()).thenReturn(new ArrayList<>());
         mockMvc.perform(MockMvcRequestBuilders.get("/addressbook/all"))
+                .andExpect(status().isOk());
+    }
+    @Test
+    void addAddressBookTest() throws Exception {
+        when(addressBookService.addAddressBook(any())).thenReturn("success");
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post("/addressbook/add")
+                        .content("{\"name\":\"Punam\",\"address\":\"Khb-colony\",\"city\":\"Bidar\"," +
+                                "\"state\":\"Karnataka\",\"phoneNumber\":\"9101122000\",\"zip\":\"585401\"}")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
 }
