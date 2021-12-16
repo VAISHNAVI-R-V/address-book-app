@@ -3,6 +3,7 @@ package com.bridgelabz.addressbook.service;
 import com.bridgelabz.addressbook.builder.AddressBuilder;
 import com.bridgelabz.addressbook.dto.AddressBookDto;
 import com.bridgelabz.addressbook.entity.AddressBookEntity;
+import com.bridgelabz.addressbook.exception.AddressBookCustomException;
 import com.bridgelabz.addressbook.repository.AddressBookRepository;
 import com.bridgelabz.addressbook.sevice.AddressBookService;
 import org.junit.jupiter.api.Test;
@@ -14,8 +15,10 @@ import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -76,6 +79,7 @@ public class AddressBookServiceTest {
         assertEquals(2, actualListOfAddressBook.size());
         assertEquals(addressBookDtoList, actualListOfAddressBook);
     }
+
     @Test
     void givenAddressBookDto_whenCalledAddAddressBookMethod_shouldReturnSuccessMessage() {
 
@@ -101,4 +105,51 @@ public class AddressBookServiceTest {
         verify(addressBookRepository, times(1)).save(addressBookEntity);
     }
 
+    @Test
+    void givenIdAndAddressDto_whenUpdateAddressBookMethodCalled_shouldUpdateAddressBookDetailsAndReturnSuccessMessage() {
+        int id = 1;
+        AddressBookDto addressBookDto = new AddressBookDto();
+        addressBookDto.setName("Diksha");
+        addressBookDto.setAddress("Munar");
+        addressBookDto.setCity("Hubbali");
+        addressBookDto.setState("Karnataka");
+        addressBookDto.setPhoneNumber("1234567000");
+        addressBookDto.setZip("003456");
+
+        AddressBookEntity addressBookEntity = new AddressBookEntity();
+        addressBookEntity.setId(1);
+        addressBookEntity.setName("Shraddha");
+        addressBookEntity.setAddress("Ekamba");
+        addressBookEntity.setCity("Bidar");
+        addressBookEntity.setState("Karnataka");
+        addressBookEntity.setPhoneNumber("1234567890");
+        addressBookEntity.setZip("004564");
+
+        when(addressBookRepository.findById(id)).thenReturn(Optional.of(addressBookEntity));
+        addressBookEntity.setName(addressBookDto.getName());
+        addressBookEntity.setPhoneNumber(addressBookDto.getPhoneNumber());
+
+        when(addressBuilder.buildAddressEntity(addressBookDto, addressBookEntity)).
+                thenReturn(addressBookEntity);
+        String actualSuccessMessage = addressBookService.updateAddressBook(id, addressBookDto);
+        verify(addressBookRepository, times(1)).save(addressBookEntity);
+        assertEquals("AddressBook Updated Successfully", actualSuccessMessage);
+        assertEquals(addressBookDto.getName(), addressBookEntity.getName());
+    }
+
+    @Test
+    void givenIdAndAddressBookDto_whenUpdateMethodIsCalled_ifIdNotFound_shouldThrowExceptionMessage() {
+        int id = 1;
+        AddressBookDto addressBookDto = new AddressBookDto();
+        addressBookDto.setName("Diksha");
+        addressBookDto.setAddress("Munar");
+        addressBookDto.setCity("Hubbali");
+        addressBookDto.setState("Karnataka");
+        addressBookDto.setPhoneNumber("1234567000");
+        addressBookDto.setZip("003456");
+
+        when(addressBookRepository.findById(id)).thenReturn(Optional.empty());
+        assertThrows(AddressBookCustomException.class, () -> addressBookService.
+                updateAddressBook(id, addressBookDto));
+    }
 }
