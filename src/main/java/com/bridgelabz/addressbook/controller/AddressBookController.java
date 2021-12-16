@@ -30,4 +30,8 @@ public class AddressBookController {
     public String addEmployee(@Valid @RequestBody AddressBookDto addressBookDto) {
         return addressBookService.addAddressBook(addressBookDto);
     }
+    @PutMapping(value = "/update/{id}")
+    public String update(@PathVariable(value = "id") int id, @Valid @RequestBody AddressBookDto addressBookDto) {
+        return addressBookService.updateAddressBook(id, addressBookDto);
+    }
 }
