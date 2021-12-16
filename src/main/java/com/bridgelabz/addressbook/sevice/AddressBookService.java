@@ -48,4 +48,10 @@ public class AddressBookService {
         addressBookRepository.save(addressBookEntity);
         return "AddressBook Updated Successfully";
     }
+
+    public String deleteAddressBook(int id) {
+        AddressBookEntity addressBookEntity = getAddressBookById(id);
+        addressBookRepository.delete(addressBookEntity);
+        return "AddressBook Deleted Successfully";
+    }
 }
