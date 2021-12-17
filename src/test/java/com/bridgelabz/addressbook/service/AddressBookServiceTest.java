@@ -23,6 +23,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+/**
+ * Purpose : To implement Test cases of Address Book Service in Address Book AppApplication.
+ *
+ * @author : VAISHANAVI R. VISHWAKARMA.
+ * @since : 16-12-2021
+ */
 @ExtendWith(MockitoExtension.class)
 public class AddressBookServiceTest {
     @InjectMocks

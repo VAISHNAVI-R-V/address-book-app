@@ -6,6 +6,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+/**
+ * Purpose : To implement Address Book Dto in Address Book AppApplication.
+ *
+ * @author : VAISHANAVI R. VISHWAKARMA.
+ * @since : 16-12-2021
+ */
 @Data
 public class AddressBookDto {
     @Pattern(regexp = "^[A-Z]{1}[a-z]{2,}$", message = "Name should be start with capital latter " +

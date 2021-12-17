@@ -16,6 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Purpose : To implement address Custom Global Exceptional Handler for address book AppApplication.
+ *
+ * @author : VAISHANAVI R. VISHWAKARMA.
+ * @since : 16-12-2021
+ */
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     /**
@@ -63,7 +69,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     /**
      * Purpose : To handle method level exception
      *
-     * @param e : e used for AtmCustom Exception
+     * @param e : e used for Address-book Custom Exception
      * @return : response entity of object type and status
      */
     @ExceptionHandler

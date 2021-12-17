@@ -15,6 +15,12 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+/**
+ * Purpose : To implement Test cases of Address Book Controller in Employee Payroll AppApplication.
+ *
+ * @author : VAISHANAVI R. VISHWAKARMA.
+ * @since : 16-12-2021
+ */
 @ExtendWith(MockitoExtension.class)
 public class AddressBookControllerTest {
     @InjectMocks
@@ -44,7 +50,7 @@ public class AddressBookControllerTest {
         addressBookDtoList.add(addressBookDto2);
 
         when(addressBookService.getAllAddress()).thenReturn(addressBookDtoList);
-        List<AddressBookDto> actualResponse = addressBookController.adrressList();
+        List<AddressBookDto> actualResponse = addressBookController.addrressList();
         for (int i = 0; i < actualResponse.size(); i++) {
             Assertions.assertEquals(addressBookDtoList.get(i).getName(), actualResponse.get(i).getName());
             Assertions.assertEquals(addressBookDtoList.get(i).getAddress(), actualResponse.get(i).getAddress());
@@ -75,12 +81,12 @@ public class AddressBookControllerTest {
         String successString = "AddressBook Update Successfully";
         int id = 1;
         AddressBookDto addressBookDto = new AddressBookDto();
-        addressBookDto.setName("Damini");
-        addressBookDto.setAddress("Mahasamund");
-        addressBookDto.setCity("Raipur");
-        addressBookDto.setState("Chhattishgarh");
-        addressBookDto.setPhoneNumber("1234567890");
-        addressBookDto.setZip("123456");
+        addressBookDto.setName("Vishal");
+        addressBookDto.setAddress("Devi colony");
+        addressBookDto.setCity("Pune");
+        addressBookDto.setState("Maharashtra");
+        addressBookDto.setPhoneNumber("9034567890");
+        addressBookDto.setZip("120056");
         when(addressBookService.updateAddressBook(id, addressBookDto)).thenReturn(successString);
         String actualResponseString = addressBookController.updateAddress(id, addressBookDto);
         assertEquals(successString, actualResponseString);

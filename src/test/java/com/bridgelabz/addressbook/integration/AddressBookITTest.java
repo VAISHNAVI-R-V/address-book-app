@@ -1,6 +1,5 @@
 package com.bridgelabz.addressbook.integration;
 
-
 import com.bridgelabz.addressbook.controller.AddressBookController;
 import com.bridgelabz.addressbook.dto.AddressBookDto;
 import com.bridgelabz.addressbook.sevice.AddressBookService;
@@ -20,6 +19,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * Purpose : To implement Integration Test cases of Address Book Controller
+ * in Address Book App Application.
+ *
+ * @author : VAISHANAVI R. VISHWAKARMA.
+ * @since : 16-12-2021
+ */
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AddressBookController.class)
 public class AddressBookITTest {
